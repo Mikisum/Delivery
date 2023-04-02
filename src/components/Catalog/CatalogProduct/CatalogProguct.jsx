@@ -1,18 +1,19 @@
 import React from 'react'
+import { API_URI } from '../../../const'
 import style from './CatalogProguct.module.css'
 
-export const CatalogProguct = ({ title }) => {
+export const CatalogProguct = ({ item }) => {
   return (
     <article className={style.product}>
-      <img src="../../src/assets/img/photo-5.jpg" alt={title} className={style.image} />
+      <img src={`${API_URI}/${item.image}`} alt={item.title} className={style.image} />
 
-      <p className="price">689<span className="currency">₽</span></p>
+      <p className="price">{item.price}<span className="currency">₽</span></p>
 
       <h3 className={style.title}>
-        <button className={style.detail}>{title}</button>
+        <button className={style.detail}>{item.title}</button>
       </h3>
 
-      <p className={style.weight}>520г</p>
+      <p className={style.weight}>{item.weight}</p>
 
       <button className={style.add} type="button">Добавить</button>
     </article>

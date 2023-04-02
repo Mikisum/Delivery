@@ -21,18 +21,19 @@ const categorySlice = createSlice({
       state.activeCategory = action.payload.indexCategory
     }
   },
-  extraReducers: {
-    [categoryRequestAsync.pending.type]: (state) => {
-      state.err = ''
-    },
-    [categoryRequestAsync.fulfilled.type]: (state, action) => {
-      state.err = ''
-      state.category = action.payload
-    },
-    [categoryRequestAsync.rejected.type]: (state, action) => {
-      state.err = action.payload.error
-    }
-  },
+  extraReducers: builder => {
+    builder
+      .addCase(categoryRequestAsync.pending, state => {
+        state.err = ''
+      })
+      .addCase(categoryRequestAsync.fulfilled, (state, action) => {
+        state.err = ''
+        state.category = action.payload
+      })
+      .addCase(categoryRequestAsync.rejected, (state, action) => {
+        state.err = action.payload.error
+      })
+  }
 })
 
 export const { changeCategory } = categorySlice.actions
